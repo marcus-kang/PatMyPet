@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pet.diary.IDao">
+<select id="isDiaryExist"
+		parameterType="int"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM DIARY
+		WHERE petId=#{petId}
+		AND diaryDate=sysdate
+</select>
+<insert id="insertWalk"
+		parameterType="com.pet.diary.Diary">
+		INSERT INTO DIARY
+		(diaryid, petid, diarydate, walkvenue, walkstart, walkstop, walkdistance)
+		VALUES (Diary_SEQ.NEXTVAL, #{petId}, sysdate, #{walkvenue}, #{walkstart}, #{walkstop}, #{walkdistance})
+</insert>
+
+<update id="updateWalk"
+		parameterType="com.pet.diary.Diary">
+		UPDATE DIARY
+		SET
+		walkvenue = #{walkvenue},
+		walkstart = #{walkstart},
+		walkstop = #{walkstop},
+		walkdistance = #{walkdistance}
+		WHERE petId = #{petId}
+		AND diaryDate = sysdate
+</update>
+</mapper>

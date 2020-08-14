@@ -1,0 +1,48 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+Date date = new Date();
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd(E)");
+String today = sdf.format(date);
+%>
+<style>
+#petList{
+margin: auto;
+text-align: left;
+width: 70%;
+height: 60px;
+background-color: #CFE2F3;
+border: 1px solid black;
+border-radius: 5px;
+}
+#addPet{
+width: 30px;
+height: 30px;
+text-align: center;
+border-radius: 50%;
+border: 1px solid black;
+}
+img{
+width: 50px;
+height: 50px;
+}
+</style>
+<script type="text/javascript">
+function selectPet(selectedId){
+	var myPets = document.getElementsByName('myPet');
+	for(var pet of myPets){
+		pet.setAttribute('style', '');
+	}
+	var selectedPet = document.getElementById(selectedId);
+	selectedPet.setAttribute('style', 'border: 1px solid #F839F9');
+}
+</script>
+<h2>관리일지</h2>
+<%=today %>
+<div id=petList>
+	<img alt="내 반려동물 사진1" src="resources/images/bulldog.jpg" name="myPet" id="petId1" onclick="selectPet(this.id)"/>
+	<img alt="내 반려동물 사진2" src="resources/images/pome.jpg" name="myPet" id="petId2" onclick="selectPet(this.id)"/>
+	<input type="button" id="addPet" value="+">
+</div>
