@@ -24,10 +24,14 @@ public class DiaryService implements IDiaryService{
 	
 	public boolean isDiaryExist(int petId) {
 		int count = iDao.isDiaryExist(petId);
-		if (count == 0)
+		if (count == 0) {
+			System.out.println("petId가 없습니다.");
 			return false;
-		else if(count == 1)
+		}
+		else if(count == 1) {
+			System.out.println("petId = " + petId);
 			return true;
+		}
 		return false;
 	}
 }

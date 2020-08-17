@@ -25,6 +25,7 @@
 		walkstop = #{walkstop},
 		walkdistance = #{walkdistance}
 		WHERE petId = #{petId}
-		AND diaryDate = sysdate
+		AND diaryDate <![CDATA[<]]> sysdate+1
+		AND diaryDate <![CDATA[>]]> sysdate-1
 </update>
 </mapper>

@@ -64,3 +64,13 @@ SELECT COUNT(*)
 		AND diaryDate = sysdate
 
 INSERT INTO DIARY (diaryid, petid, diarydate) VALUES (Diary_SEQ.NEXTVAL, '2', TO_DATE('20/08/14', 'RR/MM/DD'));
+
+UPDATE DIARY
+		SET
+		walkvenue = '동네한바퀴',
+		walkstart = '00:00',
+		walkstop = '05:00',
+		walkdistance = '5'
+		WHERE petId = 1
+		AND diaryDate < sysdate+1
+		AND diaryDate > sysdate-1

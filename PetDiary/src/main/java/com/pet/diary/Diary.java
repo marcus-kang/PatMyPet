@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Diary {
     private Integer diaryid;
-    private Integer petid;
+    private Integer petId;
     private Date date;
     private String walkvenue;
     private String walkstart;
@@ -27,11 +27,11 @@ public class Diary {
     }
 
     public Integer getPetid() {
-        return petid;
+        return petId;
     }
 
     public void setPetid(Integer petid) {
-        this.petid = petid;
+        this.petId = petid;
     }
 
     public Date getDate() {
@@ -134,7 +134,7 @@ public class Diary {
     public void CopyData(Diary param)
     {
         this.diaryid = param.getDiaryid();
-        this.petid = param.getPetid();
+        this.petId = param.getPetid();
         this.date = param.getDate();
         this.walkvenue = param.getWalkvenue();
         this.walkstart = param.getWalkstart();

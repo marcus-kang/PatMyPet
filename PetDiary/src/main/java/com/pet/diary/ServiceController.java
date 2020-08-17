@@ -29,7 +29,9 @@ public class ServiceController {
 	private static final Logger logger = LoggerFactory.getLogger(ServiceController.class);
 	
 	@RequestMapping(value = "/getPetInfo")
-	public String getPetInfo(Model model, @RequestParam("petId") String petId, @ModelAttribute("sessionInfo") Map<String, Object> sInfo) {
+	public String getPetInfo(Model model,
+			@RequestParam("petId") String petId,
+			@ModelAttribute("sessionInfo") Map<String, Object> sInfo) {
 		logger.warn("petId = " + petId);
 		sInfo.put("petId", petId);
 		model.addAttribute("petId", petId);
@@ -42,7 +44,7 @@ public class ServiceController {
 			@ModelAttribute("sessionInfo") Map<String, Object> sInfo) {
 		logger.warn("walkdistance = "+diary.getWalkdistance());
 		model.addAttribute("msg", iServ.walkProc(diary, sInfo));
-		return "forward:/first";
+		return "forward:main";
 	}
 	/*
 	@RequestMapping(value = "/")
