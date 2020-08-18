@@ -28,27 +28,51 @@ background-color: #D1CF8D;
 }
 </style>
 <script>
+var peeStatus = 0;
+var pooStatus = 0;
+
 function selectPee(selectedId){
 	var pees = document.getElementsByClassName('pee');
 	for(var pee of pees){
 		pee.setAttribute('style', '');
 		pee.value = "";
+		pee.setAttribute('name', '');
 	}
 	var selectedPee = document.getElementById(selectedId);
+	selectedPee.setAttribute('name', 'pee');
 	selectedPee.setAttribute('style', 'border: 1px solid #F839F9');
 	selectedPee.value = "v";
+	peeStatus = 1;
 }
 
 function selectPoo(selectedId){
 	var poos = document.getElementsByClassName('poo');
 	for(var poo of poos){
 		poo.setAttribute('style', '');
+		poo.setAttribute('name', '');
 	}
 	var selectedPoo = document.getElementById(selectedId);
+	selectedPoo.setAttribute('name', 'poo');
 	selectedPoo.setAttribute('style', 'border: 1px solid #F839F9;border-radius:5px;color:#F839F9');
+	pooStatus = 1;
+}
+
+function submitFrm(){
+	if(peeStatus == 0){
+		alert('소변 상태를 체크해주세요');
+	}else if(pooStatus == 0){
+		alert('대변 상태를 체크해주세요');
+	}else{
+		document.getElementsByName('pee')[0].value = document.getElementsByName('pee')[0].id;
+		document.getElementsByName('poo')[0].value = document.getElementsByName('poo')[0].id;
+		alert(document.getElementsByName('pee')[0].value);
+		document.getElementById('peePooFrm').action = "${home }action/peePooProc";
+		document.getElementById('peePooFrm').submit();
+	}
 }
 </script>
 <center>
+<form id="peePooFrm" method="post">
 <table id="peePooTable">
 	<tr><td><h3>소변</h3></td></tr>
 	<tr><td>
@@ -70,8 +94,9 @@ function selectPoo(selectedId){
 	</td></tr>
 	<tr><td><h3>특이사항</h3></td></tr>
 	<tr>
-		<td><textarea id="distanceBtn" placeholder="+입력하기"></textarea></td>
+		<td><textarea id="distanceBtn" name="note" placeholder="+입력하기"></textarea></td>
 	</tr>
-	<tr><td><input type="button" id="okBtn" value="완료"></td></tr>
+	<tr><td><input type="button" id="okBtn" onclick="submitFrm()" value="완료"></td></tr>
 </table>
+</form>
 </center>

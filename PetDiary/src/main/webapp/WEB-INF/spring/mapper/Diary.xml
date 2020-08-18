@@ -7,13 +7,21 @@
 		SELECT COUNT(*)
 		FROM DIARY
 		WHERE petId=#{petId}
-		AND diaryDate=sysdate
+		AND TO_CHAR(diaryDate, 'YYYYMMDD')=TO_CHAR(sysdate, 'YYYYMMDD')
+</select>
+<select id="getDiaryInfo"
+		parameterType="int"
+		resultType="com.pet.diary.Diary">
+		SELECT *
+		FROM DIARY
+		WHERE petId=#{petId}
+		AND TO_CHAR(diaryDate, 'YYYYMMDD')=TO_CHAR(sysdate, 'YYYYMMDD')
 </select>
 <insert id="insertWalk"
 		parameterType="com.pet.diary.Diary">
 		INSERT INTO DIARY
 		(diaryid, petid, diarydate, walkvenue, walkstart, walkstop, walkdistance)
-		VALUES (Diary_SEQ.NEXTVAL, #{petId}, sysdate, #{walkvenue}, #{walkstart}, #{walkstop}, #{walkdistance})
+		VALUES ((SELECT NVL(MAX(diaryid),0)+1 FROM diary), #{petId}, sysdate, #{walkvenue}, #{walkstart}, #{walkstop}, #{walkdistance})
 </insert>
 
 <update id="updateWalk"
@@ -25,7 +33,23 @@
 		walkstop = #{walkstop},
 		walkdistance = #{walkdistance}
 		WHERE petId = #{petId}
-		AND diaryDate <![CDATA[<]]> sysdate+1
-		AND diaryDate <![CDATA[>]]> sysdate-1
+		AND TO_CHAR(diaryDate, 'YYYYMMDD')=TO_CHAR(sysdate, 'YYYYMMDD')
+</update>
+<insert id="insertPeePoo"
+		parameterType="com.pet.diary.Diary">
+		INSERT INTO DIARY
+		(diaryid, petid, diarydate, pee, poo, note)
+		VALUES ((SELECT NVL(MAX(diaryid),0)+1 FROM diary), #{petId}, sysdate, #{pee}, #{poo}, #{note})
+</insert>
+
+<update id="updatePeePoo"
+		parameterType="com.pet.diary.Diary">
+		UPDATE DIARY
+		SET
+		pee = #{pee},
+		poo = #{poo},
+		note = #{note}
+		WHERE petId = #{petId}
+		AND TO_CHAR(diaryDate, 'YYYYMMDD')=TO_CHAR(sysdate, 'YYYYMMDD')
 </update>
 </mapper>

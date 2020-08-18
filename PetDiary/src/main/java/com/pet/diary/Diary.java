@@ -5,7 +5,7 @@ import java.util.Date;
 public class Diary {
     private Integer diaryid;
     private Integer petId;
-    private Date date;
+    private Date diarydate;
     private String walkvenue;
     private String walkstart;
     private String walkstop;
@@ -13,7 +13,7 @@ public class Diary {
     private String pee;
     private String poo;
     private String note;
-    private Date eattime;
+    private String eattime;
     private String food;
     private String weight;
     private String condition;
@@ -35,11 +35,11 @@ public class Diary {
     }
 
     public Date getDate() {
-        return date;
+        return diarydate;
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        this.diarydate = date;
     }
 
     public String getWalkvenue() {
@@ -98,11 +98,11 @@ public class Diary {
         this.note = note;
     }
 
-    public Date getEattime() {
+    public String getEattime() {
         return eattime;
     }
 
-    public void setEattime(Date eattime) {
+    public void setEattime(String eattime) {
         this.eattime = eattime;
     }
 
@@ -135,7 +135,7 @@ public class Diary {
     {
         this.diaryid = param.getDiaryid();
         this.petId = param.getPetid();
-        this.date = param.getDate();
+        this.diarydate = param.getDate();
         this.walkvenue = param.getWalkvenue();
         this.walkstart = param.getWalkstart();
         this.walkstop = param.getWalkstop();

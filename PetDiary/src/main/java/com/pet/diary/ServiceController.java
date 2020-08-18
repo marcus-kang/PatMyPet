@@ -18,6 +18,18 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @RequestMapping("/action")
 @Controller
 public class ServiceController {
+	
+	private Map<String, String> pageMap;
+	
+	public ServiceController() {
+		pageMap = new HashMap<String, String>();
+		pageMap.put("walk", "Action/walk");
+		pageMap.put("peePoo", "Action/peePoo");
+		pageMap.put("eat", "Action/eat");
+		pageMap.put("weight", "Action/weight");
+		pageMap.put("health", "Action/health");
+	}
+	
 	@Autowired
 	private IDiaryService iServ;
 	
@@ -30,11 +42,14 @@ public class ServiceController {
 	
 	@RequestMapping(value = "/getPetInfo")
 	public String getPetInfo(Model model,
-			@RequestParam("petId") String petId,
+			@RequestParam("petId") int petId,
 			@ModelAttribute("sessionInfo") Map<String, Object> sInfo) {
-		logger.warn("petId = " + petId);
+		logger.warn("controller petId = " + petId);
 		sInfo.put("petId", petId);
-		model.addAttribute("petId", petId);
+		if(iServ.isDiaryExist(petId, sInfo)) {
+			Diary returnDiary = (Diary) sInfo.get("diaryInfo");
+			model.addAttribute("diaryList", returnDiary);
+		}
 		model.addAttribute("disabled", false);
 		return "first";
 	}
@@ -42,17 +57,26 @@ public class ServiceController {
 	@RequestMapping(value = "/walkProc")
 	public String walkProc(Diary diary, Model model,
 			@ModelAttribute("sessionInfo") Map<String, Object> sInfo) {
-		logger.warn("walkdistance = "+diary.getWalkdistance());
+		System.out.println("diary.getWalkvenue : " + diary.getWalkvenue());
 		model.addAttribute("msg", iServ.walkProc(diary, sInfo));
-		return "forward:main";
+		return "forward:/main";
 	}
-	/*
-	@RequestMapping(value = "/")
-	public String home() {
-		return "main";
+	
+	@RequestMapping(value = "/peePooProc")
+	public String peePooProc(Diary diary, Model model,
+			@ModelAttribute("sessionInfo") Map<String, Object> sInfo) {
+		System.out.println("diary.getPee : "+diary.getPee());
+		model.addAttribute("msg", iServ.peePooProc(diary, sInfo));
+		return "forward:/main";
 	}
-	@RequestMapping(value="/{path}")
-	public String loadPage(@PathVariable String path) {
-		return "";
-	}*/
+	
+	@RequestMapping(value = "/editProc/{action}")
+	public String editProc(Diary diary, Model model,
+			@PathVariable("action") String action,
+			@ModelAttribute("sessionInfo") Map<String, Object> sInfo) {
+		logger.warn("editProc/action = "+action);
+		model.addAttribute("diaryList", sInfo.get("diaryInfo"));
+		return "/"+pageMap.get(action);
+	}
+	
 }
