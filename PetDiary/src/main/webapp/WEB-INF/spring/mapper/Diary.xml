@@ -17,13 +17,20 @@
 		WHERE petId=#{petId}
 		AND TO_CHAR(diaryDate, 'YYYYMMDD')=TO_CHAR(sysdate, 'YYYYMMDD')
 </select>
+
+<insert id="addPetProc"
+		parameterType="com.pet.diary.Pet">
+		INSERT INTO PET
+		(petid, userid, petname, petbirth, petgender, petspecies)
+		VALUES ((SELECT NVL(MAX(petid),0)+1 FROM pet), #{userid}, #{petname}, #{petbirth}, #{petgender}, #{petspecies})
+</insert>
+
 <insert id="insertWalk"
 		parameterType="com.pet.diary.Diary">
 		INSERT INTO DIARY
 		(diaryid, petid, diarydate, walkvenue, walkstart, walkstop, walkdistance)
 		VALUES ((SELECT NVL(MAX(diaryid),0)+1 FROM diary), #{petId}, sysdate, #{walkvenue}, #{walkstart}, #{walkstop}, #{walkdistance})
 </insert>
-
 <update id="updateWalk"
 		parameterType="com.pet.diary.Diary">
 		UPDATE DIARY
@@ -35,13 +42,13 @@
 		WHERE petId = #{petId}
 		AND TO_CHAR(diaryDate, 'YYYYMMDD')=TO_CHAR(sysdate, 'YYYYMMDD')
 </update>
+
 <insert id="insertPeePoo"
 		parameterType="com.pet.diary.Diary">
 		INSERT INTO DIARY
 		(diaryid, petid, diarydate, pee, poo, note)
 		VALUES ((SELECT NVL(MAX(diaryid),0)+1 FROM diary), #{petId}, sysdate, #{pee}, #{poo}, #{note})
 </insert>
-
 <update id="updatePeePoo"
 		parameterType="com.pet.diary.Diary">
 		UPDATE DIARY
@@ -49,6 +56,53 @@
 		pee = #{pee},
 		poo = #{poo},
 		note = #{note}
+		WHERE petId = #{petId}
+		AND TO_CHAR(diaryDate, 'YYYYMMDD')=TO_CHAR(sysdate, 'YYYYMMDD')
+</update>
+
+<insert id="insertEat"
+		parameterType="com.pet.diary.Diary">
+		INSERT INTO DIARY
+		(diaryid, petid, diarydate, eattime, food)
+		VALUES ((SELECT NVL(MAX(diaryid),0)+1 FROM diary), #{petId}, sysdate, #{eattime}, #{food})
+</insert>
+<update id="updateEat"
+		parameterType="com.pet.diary.Diary">
+		UPDATE DIARY
+		SET
+		eattime = #{eattime},
+		food = #{food}
+		WHERE petId = #{petId}
+		AND TO_CHAR(diaryDate, 'YYYYMMDD')=TO_CHAR(sysdate, 'YYYYMMDD')
+		ORDER BY eattime asc
+</update>
+
+<insert id="insertWeight"
+		parameterType="com.pet.diary.Diary">
+		INSERT INTO DIARY
+		(diaryid, petid, diarydate, weight)
+		VALUES ((SELECT NVL(MAX(diaryid),0)+1 FROM diary), #{petId}, sysdate, #{weight})
+</insert>
+<update id="updateWeight"
+		parameterType="com.pet.diary.Diary">
+		UPDATE DIARY
+		SET
+		weight = #{weight}
+		WHERE petId = #{petId}
+		AND TO_CHAR(diaryDate, 'YYYYMMDD')=TO_CHAR(sysdate, 'YYYYMMDD')
+</update>
+
+<insert id="insertHealth"
+		parameterType="com.pet.diary.Diary">
+		INSERT INTO DIARY
+		(diaryid, petid, diarydate, condition)
+		VALUES ((SELECT NVL(MAX(diaryid),0)+1 FROM diary), #{petId}, sysdate, #{condition})
+</insert>
+<update id="updateHealth"
+		parameterType="com.pet.diary.Diary">
+		UPDATE DIARY
+		SET
+		condition = #{condition}
 		WHERE petId = #{petId}
 		AND TO_CHAR(diaryDate, 'YYYYMMDD')=TO_CHAR(sysdate, 'YYYYMMDD')
 </update>

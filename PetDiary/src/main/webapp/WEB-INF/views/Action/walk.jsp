@@ -2,6 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:url var="home" value="/" />
+<style>
+input[type=button]{
+background-color: #F2BED6;
+border: 0px;
+border-radius: 5px;
+color: white;
+}
+</style>
 <script>
 var walkvenue = document.getElementById('walkvenue');
 var walkdistance = document.getElementById('walkdistance');
@@ -20,16 +28,6 @@ function onlyNumber() {
 	}
 	event.returnValue = true;
 }
-function submitFrm(){
-	walkvenue.setAttribution('required', true);
-	walkdistance.setAttribution('required', true);
-	document.getElementById('walkstart').value = startHr.options[startHr.selectedIndex].value +":"+ startMin.options[startMin.selectedIndex].value;
-	document.getElementById('walkstop').value = stopHr.options[stopHr.selectedIndex].value +":"+ stopMin.options[stopMin.selectedIndex].value;
-	
-	document.getElementById('walkFrm').action = "${home }action/walkProc";
-	document.getElementById('walkFrm').submit();
-}
-
 if('${diaryList.walkvenue}' !== null && '${diaryList.walkvenue}' !== ""){
 	walkvenue.value = '${diaryList.walkvenue}';
 
@@ -43,6 +41,20 @@ if('${diaryList.walkvenue}' !== null && '${diaryList.walkvenue}' !== ""){
 
 	walkdistance.value = '${diaryList.walkdistance}';
 }
+function submitFrm(){
+	if(walkvenue.value == ""){
+		alert('장소를 입력해주세요');
+	}else if(walkdistance.value == ""){
+		alert('거리를 입력해주세요');
+	}else{
+		document.getElementById('walkstart').value = startHr.options[startHr.selectedIndex].value +":"+ startMin.options[startMin.selectedIndex].value;
+		document.getElementById('walkstop').value = stopHr.options[stopHr.selectedIndex].value +":"+ stopMin.options[stopMin.selectedIndex].value;
+		
+		document.getElementById('walkFrm').action = "${home }action/walkProc";
+		document.getElementById('walkFrm').submit();		
+	}
+}
+
 </script>
 <center>
 <form id="walkFrm" method="post">
@@ -84,7 +96,7 @@ if('${diaryList.walkvenue}' !== null && '${diaryList.walkvenue}' !== ""){
 		<td>거리</td>
 		<td><input type="text" name="walkdistance" id="walkdistance" onkeypress="onlyNumber();" required>km</td>
 	</tr>
-	<tr><td colspan=2><input type="submit" id="okBtn" onclick="submitFrm()" value="완료"></td></tr>
+	<tr><td colspan=2><input type="button" id="okBtn" onclick="submitFrm()" value="완료"></td></tr>
 </table>
 </form>
 </center>

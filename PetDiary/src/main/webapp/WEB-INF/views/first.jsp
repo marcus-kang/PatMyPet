@@ -1,16 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<style>
+#diaryList input[type=button]{
+background-color: #F2BED6;
+border: 0px;
+border-radius: 5px;
+color: #DADDE2;
+}
+td{
+text-align: center;
+}
+</style>
 <script type="text/javascript">
 function addProc(actionId){
-	$('#logContainer').load(actionId);
+	$('#logContainer').load(${home }actionId);
 }
 function editProc(actionId){
-	$('#logContainer').load("action/editProc/"+actionId);
+	$('#logContainer').load("${home}action/editProc/"+actionId);
 }
 var actBtns = document.getElementsByClassName('actionBtn');
 if('${disabled}' !== null || '${disabled}' !== ""){
 	for(var btn of actBtns){
 		btn.disabled = ${disabled};
+		btn.setAttribute('style', 'color:white;')
 	}	
 }
 

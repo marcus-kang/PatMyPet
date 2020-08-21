@@ -1,6 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:url var="home" value="/" />
 <style>
+input[type=button]{
+background-color: #F2BED6;
+border: 0px;
+border-radius: 5px;
+color: white;
+}
+#peeInfo{
+border: 1px solid black;
+border-radius: 50%;
+}
 .pee{
 width: 30px;
 height: 30px;
@@ -39,7 +51,7 @@ function selectPee(selectedId){
 		pee.setAttribute('name', '');
 	}
 	var selectedPee = document.getElementById(selectedId);
-	selectedPee.setAttribute('name', 'pee');
+	selectedPee.setAttribute('name', 'selectedPee');
 	selectedPee.setAttribute('style', 'border: 1px solid #F839F9');
 	selectedPee.value = "v";
 	peeStatus = 1;
@@ -52,9 +64,13 @@ function selectPoo(selectedId){
 		poo.setAttribute('name', '');
 	}
 	var selectedPoo = document.getElementById(selectedId);
-	selectedPoo.setAttribute('name', 'poo');
+	selectedPoo.setAttribute('name', 'selectedPoo');
 	selectedPoo.setAttribute('style', 'border: 1px solid #F839F9;border-radius:5px;color:#F839F9');
 	pooStatus = 1;
+}
+
+function loadPeeInfo(){
+	window.open("${home}peeInfo", 'window', 'width=850, height=500');
 }
 
 function submitFrm(){
@@ -63,9 +79,8 @@ function submitFrm(){
 	}else if(pooStatus == 0){
 		alert('대변 상태를 체크해주세요');
 	}else{
-		document.getElementsByName('pee')[0].value = document.getElementsByName('pee')[0].id;
-		document.getElementsByName('poo')[0].value = document.getElementsByName('poo')[0].id;
-		alert(document.getElementsByName('pee')[0].value);
+		document.getElementById('pee').value = document.getElementsByName('selectedPee')[0].id;
+		document.getElementById('poo').value = document.getElementsByName('selectedPoo')[0].id;
 		document.getElementById('peePooFrm').action = "${home }action/peePooProc";
 		document.getElementById('peePooFrm').submit();
 	}
@@ -82,6 +97,8 @@ function submitFrm(){
 		<input type="button" class="pee" id="pink" onclick="selectPee(this.id)">
 		<input type="button" class="pee" id="brown" onclick="selectPee(this.id)">
 		<input type="button" class="pee" id="green" onclick="selectPee(this.id)">
+		<input type="button" id="peeInfo" onclick="loadPeeInfo()" value="i">
+		<input type="hidden" name="pee" id="pee">
 	</td></tr>
 	<tr><td><h3>대변</h3></td></tr>
 	<tr><td>
@@ -91,6 +108,7 @@ function submitFrm(){
 		<input type="button" class="poo" id="rigid" value="단단함" onclick="selectPoo(this.id)">
 		<input type="button" class="poo" id="black" value="검은색" onclick="selectPoo(this.id)">
 		<input type="button" class="poo" id="red" value="붉은색" onclick="selectPoo(this.id)">
+		<input type="hidden" name="poo" id="poo">
 	</td></tr>
 	<tr><td><h3>특이사항</h3></td></tr>
 	<tr>

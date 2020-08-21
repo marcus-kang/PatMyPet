@@ -9,18 +9,14 @@ import org.springframework.stereotype.Service;
 public class DiaryService implements IDiaryService{
 	@Autowired
 	private IDao iDao;
+	
+	private final String UPDATEOK = "정보가 업데이트 되었습니다.";
+	private final String INSERTOK = "정보가 입력 되었습니다.";
+
 
 	@Override
-	public String walkProc(Diary diary, Map<String, Object> sInfo) {
-		diary.setPetid((Integer) sInfo.get("petId"));
-		System.out.println("iServ sInfo petId = "+sInfo.get("petId"));
-		if(isDiaryExist(diary.getPetid(), sInfo)) {
-			iDao.updateWalk(diary);
-			return "정보가 업데이트 되었습니다.";
-		}else {
-			iDao.insertWalk(diary);
-			return "정보가 입력되었습니다.";
-		}
+	public Map<String, Object> getPetInfo(int userId) {
+		return iDao.getPetInfo(userId);
 	}
 	
 	@Override
@@ -39,15 +35,74 @@ public class DiaryService implements IDiaryService{
 	}
 
 	@Override
+	public String addPetProc(Pet pet, Map<String, Object> sInfo) {
+		pet.setUserid(1);
+		iDao.addPetProc(pet);
+		return "반려동물이 추가되었습니다.";
+	}
+
+	@Override
+	public String walkProc(Diary diary, Map<String, Object> sInfo) {
+		diary.setPetid((Integer) sInfo.get("petId"));
+		System.out.println("iServ sInfo petId = "+sInfo.get("petId"));
+		if(isDiaryExist(diary.getPetid(), sInfo)) {
+			iDao.updateWalk(diary);
+			return UPDATEOK;
+		}else {
+			iDao.insertWalk(diary);
+			return INSERTOK;
+		}
+	}
+	
+	@Override
 	public String peePooProc(Diary diary, Map<String, Object> sInfo) {
 		diary.setPetid((Integer) sInfo.get("petId"));
 		System.out.println("iServ sInfo petId = "+sInfo.get("petId"));
 		if(isDiaryExist(diary.getPetid(), sInfo)) {
 			iDao.updatePeePoo(diary);
-			return "정보가 업데이트 되었습니다.";
+			return UPDATEOK;
 		}else {
 			iDao.insertPeePoo(diary);
-			return "정보가 입력되었습니다.";
+			return INSERTOK;
+		}
+	}
+
+	@Override
+	public String eatProc(Diary diary, Map<String, Object> sInfo) {
+		diary.setPetid((Integer) sInfo.get("petId"));
+		System.out.println("iServ sInfo petId = "+sInfo.get("petId"));
+		if(isDiaryExist(diary.getPetid(), sInfo)) {
+			iDao.updateEat(diary);
+			return UPDATEOK;
+		}else {
+			iDao.insertEat(diary);
+			return INSERTOK;
+		}
+	}
+
+	@Override
+	public String weightProc(Diary diary, Map<String, Object> sInfo) {
+		diary.setPetid((Integer) sInfo.get("petId"));
+		System.out.println("iServ sInfo petId = "+sInfo.get("petId"));
+		if(isDiaryExist(diary.getPetid(), sInfo)) {
+			iDao.updateWeight(diary);
+			return UPDATEOK;
+		}else {
+			iDao.insertWeight(diary);
+			return INSERTOK;
+		}
+	}
+
+	@Override
+	public String healthProc(Diary diary, Map<String, Object> sInfo) {
+		diary.setPetid((Integer) sInfo.get("petId"));
+		System.out.println("iServ sInfo petId = "+sInfo.get("petId"));
+		if(isDiaryExist(diary.getPetid(), sInfo)) {
+			iDao.updateHealth(diary);
+			return UPDATEOK;
+		}else {
+			iDao.insertHealth(diary);
+			return INSERTOK;
 		}
 	}
 }

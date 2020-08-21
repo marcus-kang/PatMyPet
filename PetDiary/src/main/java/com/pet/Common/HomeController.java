@@ -28,8 +28,10 @@ public class HomeController {
 	public HomeController() {
 		pageMap = new HashMap<String, String>();
 		pageMap.put("first", "first");
+		pageMap.put("addPet", "Action/addPet");
 		pageMap.put("walk", "Action/walk");
 		pageMap.put("peePoo", "Action/peePoo");
+		pageMap.put("peeInfo", "Action/peeInfo");
 		pageMap.put("eat", "Action/eat");
 		pageMap.put("weight", "Action/weight");
 		pageMap.put("health", "Action/health");
@@ -40,11 +42,7 @@ public class HomeController {
 		//model.addAttribute("userId", userId);
 		return "main";
 	}
-	/*
-	@RequestMapping(value="/first")
-	public String first() {
-		return "first";
-	}*/
+	
 	@RequestMapping(value="/{path}")
 	public String loadPage(@PathVariable String path) {
 		System.out.println(pageMap.get(path));
