@@ -12,6 +12,10 @@ background-color: #EEEEEE;
 border: 1px solid black;
 border-radius: 5px;
 }
+td{
+text-align: center;
+padding: 5px;
+}
 </style>
 <script>
 var weight = document.getElementById('weight');
@@ -25,6 +29,11 @@ function onlyNumber() {
 	}
 	event.returnValue = true;
 }
+
+if('${diaryList.weight}' !== null && '${diaryList.weight}' !== ""){
+	weight.value = '${diaryList.weight}';
+}
+
 function submitFrm(){
 	if(weight.value == ""){
 		alert('체중을 입력해주세요');

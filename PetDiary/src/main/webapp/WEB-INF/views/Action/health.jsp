@@ -7,6 +7,10 @@ border: 0px;
 border-radius: 5px;
 color: white;
 }
+td{
+text-align: center;
+padding: 5px;
+}
 </style>
 <script>
 var condition = document.getElementById('condition');
@@ -18,6 +22,11 @@ function selectStatus(selectedId){
 	var selectedStatus = document.getElementById(selectedId);
 	selectedStatus.setAttribute('style', 'border: 1px solid #F839F9;border-radius:5px;color:#F839F9');
 }
+
+if('${diaryList.condition}' !== null && '${diaryList.condition}' !== ""){
+	condition.value = '${diaryList.condition}';
+}
+
 function submitFrm(){
 	if(condition.value == ""){
 		alert('건강상태를 입력해주세요');

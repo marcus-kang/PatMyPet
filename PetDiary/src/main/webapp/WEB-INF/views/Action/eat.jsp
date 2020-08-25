@@ -7,6 +7,10 @@ border: 0px;
 border-radius: 5px;
 color: white;
 }
+td{
+text-align: center;
+padding: 5px;
+}
 </style>
 <script>
 function deleteButton(deleteClassName){

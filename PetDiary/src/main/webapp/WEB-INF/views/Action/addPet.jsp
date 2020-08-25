@@ -32,6 +32,13 @@ background-color: #7A3A3E;
 #green{
 background-color: #D1CF8D;
 }
+td{
+text-align: center;
+padding: 5px;
+}
+.typeOpt{
+word-break:break-word;
+}
 </style>
 <script>
 var genderStatus = 0;
@@ -159,12 +166,12 @@ function submitFrm(){
 	<input type="button" class="dogList" id="poodle" value="푸들" onclick="selectSpecies(this.id)">
 	<input type="button" class="dogList" id="pome" value="포메라니안" onclick="selectSpecies(this.id)">
 	<input type="button" class="dogList" id="shitzu" value="시츄" onclick="selectSpecies(this.id)">
-	<input type="button" class="dogList" id="chihuahua" value="치와와" onclick="selectSpecies(this.id)">
+	<input type="button" class="dogList" id="chihuahua" value="치와와" onclick="selectSpecies(this.id)"><br/>
 	<input type="button" class="dogList" id="dachshund" value="닥스훈트" onclick="selectSpecies(this.id)">
 	<input type="button" class="dogList" id="retriever" value="리트리버" onclick="selectSpecies(this.id)">
 	<input type="button" class="dogList" id="corgi" value="웰시코기" onclick="selectSpecies(this.id)">
 	<input type="button" class="dogList" id="bichon" value="비숑" onclick="selectSpecies(this.id)">
-	<input type="button" class="dogList" id="shiba" value="시바견" onclick="selectSpecies(this.id)">
+	<input type="button" class="dogList" id="shiba" value="시바견" onclick="selectSpecies(this.id)"><br/>
 	<input type="button" class="dogList" id="spitz" value="스피츠" onclick="selectSpecies(this.id)">
 	<input type="button" class="dogList" id="etcDog" value="기타" onclick="selectSpecies(this.id)">
 	</div>
@@ -173,12 +180,12 @@ function submitFrm(){
 	<input type="button" class="catList" id="russian" value="러시안블루" onclick="selectSpecies(this.id)">
 	<input type="button" class="catList" id="munchkin" value="먼치킨" onclick="selectSpecies(this.id)">
 	<input type="button" class="catList" id="persian" value="페르시안" onclick="selectSpecies(this.id)">
-	<input type="button" class="catList" id="siamese" value="샴" onclick="selectSpecies(this.id)">
+	<input type="button" class="catList" id="siamese" value="샴" onclick="selectSpecies(this.id)"><br/>
 	<input type="button" class="catList" id="bengal" value="벵갈" onclick="selectSpecies(this.id)">
 	<input type="button" class="catList" id="british" value="브리티쉬숏헤어" onclick="selectSpecies(this.id)">
 	<input type="button" class="catList" id="turkish" value="터키쉬앙고라" onclick="selectSpecies(this.id)">
 	<input type="button" class="catList" id="abyssinian" value="아비시니안" onclick="selectSpecies(this.id)">
-	<input type="button" class="catList" id="sphinx" value="스핑크스" onclick="selectSpecies(this.id)">
+	<input type="button" class="catList" id="sphinx" value="스핑크스" onclick="selectSpecies(this.id)"><br/>
 	<input type="button" class="catList" id="etcCat" value="기타" onclick="selectSpecies(this.id)">
 	</div>
 	<input type="hidden" name="petspecies" id="petspecies">

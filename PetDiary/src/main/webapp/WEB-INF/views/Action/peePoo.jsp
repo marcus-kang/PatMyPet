@@ -38,6 +38,10 @@ background-color: #7A3A3E;
 #green{
 background-color: #D1CF8D;
 }
+td{
+text-align: center;
+padding: 5px;
+}
 </style>
 <script>
 var peeStatus = 0;

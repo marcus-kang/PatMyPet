@@ -74,7 +74,6 @@
 		food = #{food}
 		WHERE petId = #{petId}
 		AND TO_CHAR(diaryDate, 'YYYYMMDD')=TO_CHAR(sysdate, 'YYYYMMDD')
-		ORDER BY eattime asc
 </update>
 
 <insert id="insertWeight"

@@ -3,6 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:url var="home" value="/" />
 <style>
+td{
+text-align: center;
+padding: 5px;
+}
 input[type=button]{
 background-color: #F2BED6;
 border: 0px;

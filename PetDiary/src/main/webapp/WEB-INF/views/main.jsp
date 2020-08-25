@@ -21,31 +21,28 @@ font-style: normal;
 font-family: DXADayB;
 }
 #diaryContainer{
+padding: 10px;
 margin: auto;
 width: 800px;
-height: auto;
+height: 500px;
 background-color: #9DADBC;
 border: 1px solid black;
 border-radius: 5px;
 text-align: center;
 }
-#logContainer{
-padding: 5px;
+#petList{
+padding: 10px;
 margin: auto;
+text-align: left;
 width: 70%;
+height: 70px;
 background-color: #B1DAFF;
 border: 1px solid black;
 border-radius: 5px;
 }
-#petList{
-padding: 5px;
-margin: auto;
-text-align: left;
-width: 70%;
-height: 60px;
-background-color: #B1DAFF;
-border: 1px solid black;
-border-radius: 5px;
+span{
+display: inline-block;
+text-align: center;
 }
 #addPet{
 width: 30px;
@@ -62,6 +59,14 @@ height: 50px;
 }
 h1,h3{
 color: white;
+}
+#logContainer{
+padding: 10px;
+margin: 10px auto;
+width: 70%;
+background-color: #B1DAFF;
+border: 1px solid black;
+border-radius: 5px;
 }
 </style>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -94,10 +99,22 @@ function addPet(){
 <h1>관리일지</h1>
 <h3><%=today %></h3>
 <div id="petList">
+	<span>
 	<img alt="내 반려동물 사진1" src="${home }resources/images/bulldog.jpg" name="myPet" id="1" onclick="selectPet(this.id)"/>
+	<br/>퍼기
+	</span>
+	<span>
 	<img alt="내 반려동물 사진2" src="${home }resources/images/pome.jpg" name="myPet" id="2" onclick="selectPet(this.id)"/>
+	<br/>포메
+	</span>
+	<span>
 	<img alt="내 반려동물 사진3" src="${home }resources/images/retriever.jpg" name="myPet" id="3" onclick="selectPet(this.id)"/>
+	<br/>리트
+	</span>
+	<span>
 	<input type="button" id="addPet" onclick="addPet()" value="+">
+	<br/>
+	</span>
 </div>
 <div id="logContainer">
 <c:import url="/first" />
